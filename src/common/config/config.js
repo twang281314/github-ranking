@@ -3,5 +3,6 @@
  * config
  */
 export default {
-  //key: value
+  port: 8460
+    //key: value
 };
