@@ -6,3 +6,18 @@
 body{
     font-size: 12px;
 }
+
+footer{
+    text-align: center;
+    font-size: 14px;
+}
+
+.updateLog{
+    font-size: 14px;
+    margin-right:20px;
+    line-height: 40px;
+    color:orangered;
+}
+.notice{
+    text-align: center;
+}
