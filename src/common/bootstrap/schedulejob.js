@@ -12,8 +12,8 @@
 
 import schedule from 'node-schedule';
 
-let jobId = schedule.scheduleJob('* */2 * * *', () => {
-    console.log(Date() + ":It's been 2  hours!");
+let jobId = schedule.scheduleJob(' 59 * * * *', () => {
+    //console.log(Date() + ":It's been 2  hours!");
     //调用一个 Action
     think.http("/repositories/update", true); //模拟访问
 });
