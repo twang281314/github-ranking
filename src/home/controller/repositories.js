@@ -50,7 +50,7 @@ export default class extends Base {
                 'User-Agent': 'request'
             }
         };
-        for (let i = 1; i <= 1; i++) {
+        for (let i = 1; i <= 10; i++) {
             query.page = i;
             options.url = 'https://api.github.com/search/repositories?q=stars:>1000&per_page=' + query.per_page + '&page=' + query.page;
             request(options, (error, response, body) => {
