@@ -14,7 +14,7 @@ export default class extends Base {
         let lastUpdateTtime = await this.model("updateLog").where({
             updateType: 'repositories'
         }).max("updateTime");
-        let repositories = await this.model("repositories").select();
+        let repositories = await this.model("repositories").order('stargazers_count desc').select();
         this.assign('lastUpdateTtime', lastUpdateTtime);
         this.assign('items', repositories);
         this.assign('title', 'repositories ranking');
