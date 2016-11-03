@@ -11,7 +11,13 @@
                         <tr>
                             <th>Rank</th>
                             <th>Login</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Location</th>
+                            <th>Blog</th>
                             <th>Html_url</th>
+                            <th>Followers</th>
+                            <th>Created_at</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,8 +27,30 @@
                                 <td>
                                     <%= items[i].login %>
                                 </td>
+
+                                <td>
+                                    <%= items[i].name %>
+                                </td>
+                                <td>
+                                    <%= items[i].company %>
+                                </td>
+
+                                <td>
+                                    <%= items[i].location %>
+                                </td>
+
+                                <td>
+                                    <%= items[i].blog %>
+                                </td>
+
                                 <td>
                                     <%= items[i].html_url %>
+                                </td>
+                                <td>
+                                    <%= items[i].followers %>
+                                </td>
+                                <td>
+                                    <%= items[i].created_at %>
                                 </td>
                             </tr>
                             <% } %>
@@ -39,14 +67,14 @@
                         "targets": 0
                     },
                     {
-                         targets: [2],
+                         targets: [5,6],
                          render: function (data, type, full, meta) {
                              return '<a href="' + data + '" target="_blank">' + data + '</a>';
                          }
                      }                    
                     ],
                     paging:false,
-                    order: [[ 1, 'desc' ]],
+                    order: [[ 7, 'desc' ]],
                     info:false
                 });
 
