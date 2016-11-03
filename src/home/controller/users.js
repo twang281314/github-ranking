@@ -101,7 +101,7 @@ export default class extends Base {
 
         const base64Header = new Buffer(githubConfig.userName + ':' + githubConfig.passWord).toString('base64');
 
-        const users = await this.model('users').limit(200).select();
+        const users = await this.model('users').select();
 
         users.forEach((user) => {
 
