@@ -101,7 +101,7 @@ export default class extends Base {
 
     const base64Header = new Buffer(githubConfig.userName + ':' + githubConfig.passWord).toString('base64');
 
-    const users = await this.model('users').select();
+    const users = await this.model('users').limit(200).select();
 
     users.forEach((user) => {
 
@@ -123,18 +123,19 @@ export default class extends Base {
           user.location = userResult.location;
           user.created_at = userResult.created_at;
 
-          this.model('users').where({
-            id: user.id
-          }).update({
-            followers: user.followers,
-            name: user.name,
-            company: user.company,
-            blog: user.blog,
-            location: user.location,
-            created_at: user.created_at,
-            last_update_time: think.datetime()
+          this.model('users').update(user);
 
-          });
+          // this.model('users').where({
+          //   id: user.id
+          // }).update({
+          //   followers: user.followers,
+          //   name: user.name,
+          //   company: user.company,
+          //   blog: user.blog,
+          //   location: user.location,
+          //   created_at: user.created_at
+
+          // });
 
         }
       });
