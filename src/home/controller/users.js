@@ -12,6 +12,10 @@ export default class extends Base {
     async indexAction() {
         //auto render template file index_index.html
         let users = await this.model('users').order('followers desc').select();
+   
+        users.forEach(user=>{
+          user.created_at = think.datetime(user.created_at);
+        });
         let lastUpdateTtime = await this.model("updateLog").where({
             updateType: 'users'
         }).max("updateTime");
