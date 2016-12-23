@@ -1,8 +1,11 @@
-/**
- * @descrition repositories api
- * @author anytao
- * @created 2016-10-24
+/*
+ * @Author: anytao 
+ * @Description:  users api 
+ * @Date: 2016-12-23 14:35:17 
+ * @Last Modified by: anytao
+ * @Last Modified time: 2016-12-23 14:35:40
  */
+
 'use strict';
 import Base from './base.js';
 export default class extends Base {
@@ -13,9 +16,9 @@ export default class extends Base {
     async listAction() {
         var pageCurrent = this.post('pageCurrent') || 1;
         var pageSize = this.post('pageSize') || 20;
-        let repositories = await this.model('repositories')
+        let users = await this.model('users')
             .page(pageCurrent, pageSize)
             .countSelect();
-        return this.json(repositories);
+        return this.json(users);
     }
 }
