@@ -3,7 +3,7 @@
  * @Description:  users api 
  * @Date: 2016-12-23 14:35:17 
  * @Last Modified by: anytao
- * @Last Modified time: 2016-12-29 10:41:36
+ * @Last Modified time: 2016-12-29 13:54:15
  */
 
 'use strict';
@@ -20,6 +20,7 @@ export default class extends Base {
             .page(pageCurrent, pageSize)
             .countSelect();
         this.header("Access-Control-Allow-Origin", this.header("origin") || "*");
+        this.header("Access-Control-Allow-Headers", "x-requested-with");
         return this.json(users);
     }
 }

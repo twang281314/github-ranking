@@ -17,6 +17,7 @@ export default class extends Base {
             .page(pageCurrent, pageSize)
             .countSelect();
         this.header("Access-Control-Allow-Origin", this.header("origin") || "*");
+        this.header("Access-Control-Allow-Headers", "x-requested-with");
         return this.json(repositories);
     }
 }
