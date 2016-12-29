@@ -3,7 +3,7 @@
  * @Description:  users api 
  * @Date: 2016-12-23 14:35:17 
  * @Last Modified by: anytao
- * @Last Modified time: 2016-12-23 14:35:40
+ * @Last Modified time: 2016-12-29 10:41:36
  */
 
 'use strict';
@@ -19,6 +19,7 @@ export default class extends Base {
         let users = await this.model('users')
             .page(pageCurrent, pageSize)
             .countSelect();
+        this.header("Access-Control-Allow-Origin", this.header("origin") || "*");
         return this.json(users);
     }
 }

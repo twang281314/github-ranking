@@ -16,6 +16,7 @@ export default class extends Base {
         let repositories = await this.model('repositories')
             .page(pageCurrent, pageSize)
             .countSelect();
+        this.header("Access-Control-Allow-Origin", this.header("origin") || "*");
         return this.json(repositories);
     }
 }
