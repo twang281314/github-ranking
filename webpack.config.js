@@ -1,8 +1,8 @@
 var webpack = require('webpack');
 module.exports = {
     entry: [
-    //   'webpack/hot/only-dev-server',
-      "./src/table/app.js"
+      'webpack/hot/only-dev-server',
+      "./src/repositories/app.js"
     ],
     output: {
         path: './build',
@@ -18,7 +18,7 @@ module.exports = {
         extensions:['','.js','.json']
     },
     plugins: [
-    //   new webpack.HotModuleReplacementPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
       new webpack.NoErrorsPlugin()
     ]
 };
