@@ -1,8 +1,8 @@
 const path = require('path');
 const isDev = think.env === 'development';
+const cors = require('kcors');
 
-module.exports = [
-  {
+module.exports = [{
     handle: 'meta',
     options: {
       logRequest: isDev,
@@ -35,6 +35,14 @@ module.exports = [
         defaultController: 'users',
         defaultAction: 'index'
       }
+    }
+  },
+  {
+    handle: cors,
+    options: {
+      origin: '*',
+      credentials: true,
+      allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH' 
     }
   },
   'logic',

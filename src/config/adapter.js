@@ -38,13 +38,13 @@ exports.model = {
   },
   mysql: {
     handle: mysql,
-    database: '',
-    prefix: 'think_',
+    database: 'lifesing_blog',
+    prefix: '',
     encoding: 'utf8',
-    host: '127.0.0.1',
+    host: 'anytao.net',
     port: '',
     user: 'root',
-    password: 'root',
+    password: 'bnm6714420',
     dateStrings: true
   },
   sqlite: {
