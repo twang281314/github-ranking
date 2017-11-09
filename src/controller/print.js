@@ -65,6 +65,7 @@ module.exports = class extends Base {
     async getAction() {
 
         const templateUid = this.post('templateUid');
+        let result={};
         let template = {};
         template.detail = [];
         let templateDetail = [];
@@ -77,8 +78,8 @@ module.exports = class extends Base {
             template = template[0];
         }
 
-        template.detail = templateDetail;
-        return this.success(template);
-
+        result.detail = templateDetail;
+        result.template =template
+        return this.success(result);
     }
 };
