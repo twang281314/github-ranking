@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "kcors": "^2.2.1",
+    "phantom": "^4.0.7",
     "request": "^2.83.0",
     "think-cache": "^1.0.0",
     "think-cache-file": "^1.0.8",

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="http://127.0.0.1:8000/c_c2.css" />
+    <script src="http://127.0.0.1:8000/CLodopfuncs.js"></script>
+    <title>Welcome to C-Lodop</title>
+</head>
+
+<body onLoad="demoCreatePrinterList()">
+    <center>
+        <div id="itopform">
+            <form>
+                <h1>欢迎使用C-Lodop打印服务系统
+                    <span class="small">The Cloud Web Service System for Lodop HTML Print</span>
+                </h1>
+                <hr>
+            </form>
+        </div>
+    </center>
+
+    <h3>&nbsp;使用说明：</h3>
+
+    <script>
+        function demoPrint(toPrview) {
+            var strHTML = document.getElementsByTagName("html")[0].innerHTML;
+            LODOP.PRINT_INITA(10, 20, 810, 610, "测试C-Lodop远程打印四步骤");
+            LODOP.SET_PRINTER_INDEXA(document.getElementById("Select01").value);
+            LODOP.SET_PRINT_PAGESIZE(0, 0, 0, document.getElementById("Select02").value);
+            LODOP.ADD_PRINT_TEXT(1, 1, 300, 200, "下面输出的是本页源代码及其展现效果：");
+            LODOP.ADD_PRINT_TEXT(20, 10, "90%", "95%", strHTML);
+            LODOP.SET_PRINT_STYLEA(0, "ItemType", 4);
+            LODOP.NewPageA();
+            LODOP.ADD_PRINT_HTM(20, 10, "90%", "95%", strHTML);
+            if (toPrview)
+                LODOP.PREVIEW();
+            else
+                LODOP.PRINT();
+        };
+
+        function demoCreatePrinterList() {
+            CLODOP.Create_Printer_List(document.getElementById('Select01'));
+            demoCreatePagSizeList();
+        };
+
+        function demoCreatePagSizeList() {
+            var oSelect = document.getElementById('Select02');
+            var iPrintIndex = document.getElementById("Select01").value;
+            CLODOP.Create_PageSize_List(oSelect, iPrintIndex);
+        };
+
+        function demoCreateCLodopJSscript(strSrc) {
+            var ScriptSS = document.getElementsByTagName("script");
+            for (var i in ScriptSS) {
+                if (ScriptSS[i].src && (ScriptSS[i].src.indexOf("CLodopfuncs.js") >= 0)) {
+                    if (ScriptSS[i].parentNode) ScriptSS[i].parentNode.removeChild(ScriptSS[i]);
+                };
+            };
+            var oscript = document.createElement("script");
+            if (strSrc.indexOf("src=") >= 0) {
+                strSrc = strSrc.match(/=[\',\"][^\',^\"].*(?=[\',\"])/i);
+                strSrc = strSrc[0].slice(2);
+            }
+            oscript.src = strSrc;
+            var head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+            head.insertBefore(oscript, head.firstChild);
+            return oscript;
+        };
+
+        function demoSetClodopJS(strSrc) {
+            var oscript = demoCreateCLodopJSscript(strSrc);
+            oscript.onload = oscript.onreadystatechange = function () {
+                if ((!oscript.readyState || /loaded|complete/.test(oscript.readyState)))
+                    demoCreatePrinterList();
+            };
+        };
+    </script>
+
+    <span style="font-size:14px">
+        &nbsp;一、C-Lodop是云打印服务，可接受JS语句实现远端输出，它是因满足平板电脑和手机浏览器打印而诞生的，由于其轻巧便捷，
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以也可以安装在PC本地，是打印控件Lodop的升级产品。其在保持打印性能的同时，能适应所有浏览器的各种版本。
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;引用C-Lodop很简单，在页面head中
+        <a href="javascript:;" onclick="javascript:demoSetClodopJS(document.getElementById('T12B').value);">添加</a>
+        如下路径的js文件，就可用固定变量名LODOP或CLODOP发打印请求了:
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" name="T1" id="T12B" size="100" value="<script src='http://127.0.0.1:8000/CLodopfuncs.js'></script>">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果C-Lodop安装在PC本地，采用localhost或127.0.0.1，当有多个引用时，用name设置新变量名来区分调用：
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="text" name="T2" size="100" value="<script src='http://localhost:8000/CLodopfuncs.js?name=CLODOPA'></script>">
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页面引用了C-Lodop的js之后，就可以调用Lodop传统功能， 点
+        <a href="javascript:;" onclick="javascript:eval(document.getElementById('text01').value);">打印预览</a>执行如下经典语句(注意区分大小写)看看效果：
+        <br>
+        <br>
+
+        <textarea rows="7" id="text01" cols="100">
+            var strHTML=document.getElementsByTagName("html")[0].innerHTML; LODOP.PRINT_INITA(1,1,770,660,"测试预览功能"); LODOP.ADD_PRINT_TEXT(10,60,300,200,"这是测试的纯文本，下面是超文本:");
+            LODOP.ADD_PRINT_HTM(30,5,"100%","80%",strHTML); LODOP.PREVIEW();
+        </textarea>
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;下面是远程打印的常见四步骤：
+
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;第一步选择云主机:
+        <select id="Select00" size="1" onchange="demoSetClodopJS(document.getElementById('Select00').value)">
+            <option value="http://localhost:8000/CLodopfuncs.js">本机方式1：http://localhost:8000/CLodopfuncs.js</option>
+            <option value="http://127.0.0.1:8000/CLodopfuncs.js">本机方式2：http://127.0.0.1:8000/CLodopfuncs.js</option>
+            <option value="http://127.0.0.1:8000/CLodopfuncs.js">按IP地址：http://127.0.0.1:8000/CLodopfuncs.js</option>
+        </select>
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;第二步选择打印机:
+        <select id="Select01" size="1" onchange="demoCreatePagSizeList()"></select>
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;第三步选纸张类型:
+        <select id="Select02" size="1"></select>
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;最后是
+        <a href="javascript:demoPrint(true);">打印预览</a>，或者不预览而
+        <a href="javascript:demoPrint();">直接打印</a>
+        <br>
+        <br> &nbsp;二、默认情况下，只要能访问本页，都可以通过本服务控制打印机输出，为了阻止陌生请求，
+        <br>
+        <br> &nbsp;&nbsp;&nbsp;&nbsp;管理者可以从这里为guest用户
+        <a href="/c_mpermit">设置密码或限定白名单</a>（设置前需用admin身份登录，初始密码皆空）。
+        <br>
+        <br> &nbsp;三、本服务的俩http端口默认是"8000"和"18000"，页面程序可同时双引用。
+        <br>
+        <br> &nbsp;四、这是一个免费打印服务软件，您可以长期使用，但不能用来
+        <a href="/c_mlicense" target="_blank">商用</a>谋利。
+        <br>
+        <br> &nbsp;五、如果出现故障，可以点这里
+        <a href="/c_sysmessage" target="_blank">查看系统信息</a>。
+        <br>
+        <br> &nbsp;六、传统用户可对比欣赏用其实现&nbsp;
+        <a href="/CLodopDemos/PrintSampIndex.html" target="_blank">Lodop全部经典例子>></a>
+
+        <hr>
+        <br> &nbsp;C-Lodop安装程序可通过
+        <a href="http://www.c-lodop.com/download.html" target="_blank">官网www.c-lodop.com下载</a>最新版。
+    </span>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 'use strict';
 
 import Base from './base.js';
+import phantom from 'phantom';
 
 module.exports = class extends Base {
     async indexAction() {
@@ -15,7 +16,7 @@ module.exports = class extends Base {
         let templateDetail = this.post('templateDetail');
 
         let templateJson = null;
-        let templateDetailJSON =null;
+        let templateDetailJSON = null;
 
         const templateModel = this.model('print_template', 'mysql');
         const templateDetailModel = this.model('print_template_detail', 'mysql');
@@ -45,10 +46,10 @@ module.exports = class extends Base {
                 let detail = templateDetailJSON[i];
                 detail.templateUid = templateJson.templateUid;
                 think.logger.info(detail);
-                if (detail.detailUid) {
-                    templateDetailModel.where("detailUid='" + detail.detailUid + "'").update(detail);
+                if (detail.id) {
+                    templateDetailModel.where("id='" + detail.id + "'").update(detail);
                 } else {
-                    detail.detailUid = think.uuid();
+                    detail.id = think.uuid();
                     templateDetailModel.add(detail);
                 }
             }
@@ -65,7 +66,7 @@ module.exports = class extends Base {
     async getAction() {
 
         const templateUid = this.post('templateUid');
-        let result={};
+        let result = {};
         let template = {};
         template.detail = [];
         let templateDetail = [];
@@ -74,12 +75,31 @@ module.exports = class extends Base {
             const templateModel = this.model('print_template', 'mysql');
             const templateDetailModel = this.model('print_template_detail', 'mysql');
             template = await templateModel.where("templateUid='" + templateUid + "'").limit(1).select();
-            templateDetail = await templateDetailModel.where("templateUid='" + templateUid + "'").select();
+            templateDetail = await templateDetailModel.where("templateUid='" + templateUid + "' and itemDeleted=0").select();
             template = template[0];
         }
 
         result.detail = templateDetail;
-        result.template =template
+        result.template = template
         return this.success(result);
+    }
+
+    /**
+     * 生成lodop图片
+     */
+    async getLodopImageAction() {
+
+        (async function () {
+            const instance = await phantom.create();
+            const page = await instance.createPage();
+            await page.on('onResourceRequested', function (requestData) {
+                console.info('Requesting', requestData.url);
+            });
+
+            const status = await page.open('https://anytao.net/');
+            const content = await page.property('content');
+            console.log(content);
+            await instance.exit();
+        })();
     }
 };
