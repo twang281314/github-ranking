@@ -96,9 +96,20 @@ module.exports = class extends Base {
                 console.info('Requesting', requestData.url);
             });
 
-            const status = await page.open('https://anytao.net/');
+            const status = await page.open('http://127.0.0.1:8360/print');
             const content = await page.property('content');
-            console.log(content);
+            console.log(status);
+
+
+            await page.evaluate(function () {
+                demoPrint(true);
+                return document.getElementById('itopform').innerHTML;
+            }).then(function (html) {
+                console.log(html);
+            });
+            // await page.evaluateJavaScript('function(){demoPrint(true);}').then(function(html){
+            //     console.log(html);
+            // });
             await instance.exit();
         })();
     }
