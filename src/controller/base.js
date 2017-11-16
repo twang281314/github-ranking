@@ -5,6 +5,10 @@ module.exports = class extends think.Controller {
       return true;
     }
 
+    if (this.isCli) {
+      return true;
+    }
+
     // const token = this.header();
     let systemToken = this.config('token');
     let token = this.header('token'); //获取 header
