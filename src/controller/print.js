@@ -123,4 +123,10 @@ module.exports = class extends Base {
             await instance.exit();
         })();
     }
+
+    async getListDataAction(){
+        const templateModel = this.model('print_template', 'mysql');
+        const templates = await templateModel.select();
+        return this.success(templates);
+    }
 };
