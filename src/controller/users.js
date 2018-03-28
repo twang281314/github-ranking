@@ -117,7 +117,7 @@ export default class extends Base {
             }, (error, response, body) => {
 
                 if (error) {
-                    think.log(error);
+                    think.logger.error(error);
                 } else {
                     let userResult = JSON.parse(body);
                     user.followers = userResult.followers;

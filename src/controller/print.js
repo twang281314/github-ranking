@@ -7,6 +7,16 @@ module.exports = class extends Base {
     async indexAction() {
         await this.display();
     }
+
+    /**
+     * 模板列表页面
+     */
+    async listAction(){
+        const templateModel = this.model('print_template', 'mysql');
+        const templates = await templateModel.select();
+        this.assign('lists', templates);
+        await this.display();
+    }
     /**
      * 新增打印模板
      */
