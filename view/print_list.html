@@ -41,7 +41,7 @@
                   v-model="props.selected"
                 ></v-checkbox>
               </td>
-              <td ><a v-on:click.stop="designTemplate()">操作</a></td>
+              <td ><a v-on:click.stop="designTemplate(props.item)">操作</a></td>
               <td>{{ props.item.templateName }}</td>
               <td>{{ props.item.templateType }}</td>
               <td>{{ props.item.pageTop }}</td>
@@ -94,8 +94,8 @@
     });
   },
   methods:{
-    designTemplate:function(){
-      console.log('设计');
+    designTemplate:function(template){
+      window.open('/print/design?templateUid='+template.templateUid+'&templateType='+template.templateType)
     }
   }
 })

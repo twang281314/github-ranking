@@ -12,9 +12,17 @@ module.exports = class extends Base {
      * 模板列表页面
      */
     async listAction(){
-        const templateModel = this.model('print_template', 'mysql');
-        const templates = await templateModel.select();
-        this.assign('lists', templates);
+        await this.display();
+    }
+    
+    /**
+     * 模板设计页面
+     */
+    async designAction(){
+        const templateUid = this.get('templateUid');
+        const templateType = this.get('templateType');
+        this.assign('templateUid', templateUid);
+        this.assign('templateType', templateType);
         await this.display();
     }
     /**

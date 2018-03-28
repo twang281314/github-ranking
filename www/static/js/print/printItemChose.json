@@ -1,0 +1,517 @@
+[
+  {
+    "type": "orderDeliver",
+    "title": "发货单主体",
+    "itemTitle": "发货单明细",
+    "main": [
+      {
+        "id": "deliverNo",
+        "name": "发货单号",
+        "isChose": false
+      },
+      {
+        "id": "makeTime",
+        "name": "下单时间",
+        "isChose": false
+      },
+      {
+        "id": "storeName",
+        "name": "客户名称",
+        "isChose": false
+      },
+      {
+        "id": "recipient",
+        "name": "联系人",
+        "isChose": false
+      },
+      {
+        "id": "mobile",
+        "name": "联系电话",
+        "isChose": false
+      },
+      {
+        "id": "customerAddress",
+        "name": "客户地址",
+        "isChose": false
+      },
+      {
+        "id": "printTime",
+        "name": "打印时间",
+        "isChose": false
+      },
+      {
+        "id": "maker",
+        "name": "制单人",
+        "isChose": false
+      },
+      {
+        "id": "surplusPayAmount",
+        "name": "待支付金额",
+        "isChose": false
+      },
+      {
+        "id": "arrears",
+        "name": "历史欠款",
+        "isChose": false
+      }
+    ],
+    "items": [
+      {
+        "id": "serialNum",
+        "name": "序号",
+        "width": 100,
+        "isChose": false,
+        "footer": "本页小计",
+        "isShowSum": true
+      },
+      {
+        "id": "productName",
+        "name": "商品名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "finalPrice",
+        "name": "单价",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "skuPrice",
+        "name": "金额",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "unit",
+        "name": "单位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "deliveryNum",
+        "name": "数量",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "remarks",
+        "name": "货位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      }
+    ]
+  },
+  {
+    "type": "storageAllot",
+    "title": "调拨单主体",
+    "itemTitle": "调拨单明细",
+    "main": [
+      {
+        "id": "allocateNo",
+        "name": "调拨单号",
+        "isChose": false
+      },
+      {
+        "id": "chCreateTime",
+        "name": "制单时间",
+        "isChose": false
+      },
+      {
+        "id": "allocateType",
+        "name": "调拨类型",
+        "isChose": false
+      },
+      {
+        "id": "allocateWay",
+        "name": "调拨方式",
+        "isChose": false
+      },
+      {
+        "id": "outWarehouseName",
+        "name": "调出仓库",
+        "isChose": false
+      },
+      {
+        "id": "inWarehouseName",
+        "name": "调入仓库",
+        "isChose": false
+      },
+      {
+        "id": "printTime",
+        "name": "打印时间",
+        "isChose": false
+      },
+      {
+        "id": "remarks",
+        "name": "备注",
+        "isChose": false
+      },
+      {
+        "id": "createUserName",
+        "name": "制单人",
+        "isChose": false
+      }
+    ],
+    "items": [
+      {
+        "id": "serialNum",
+        "name": "序号",
+        "width": 100,
+        "isChose": false,
+        "footer": "本页小计",
+        "isShowSum": true
+      },
+      {
+        "id": "productName",
+        "name": "商品名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "skuValues",
+        "name": "规格名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "costPrice",
+        "name": "单价",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "totalAmount",
+        "name": "金额",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "num",
+        "name": "数量",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "comment",
+        "name": "货位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      }
+    ]
+  },
+  {
+    "type": "aftermarketStorage",
+    "title": "售后入库单主体",
+    "itemTitle": "售后入库单明细",
+    "main": [
+      {
+        "id": "storageNo",
+        "name": "售后入库单号",
+        "isChose": false
+      },
+      {
+        "id": "serviceNo",
+        "name": "来源售后单号",
+        "isChose": false
+      },
+      {
+        "id": "gmtStr",
+        "name": "售后入库时间",
+        "isChose": false
+      },
+      {
+        "id": "warehouseName",
+        "name": "仓库名称",
+        "isChose": false
+      },
+      {
+        "id": "printTime",
+        "name": "打印时间",
+        "isChose": false
+      },
+      {
+        "id": "createUserName",
+        "name": "制单人",
+        "isChose": false
+      }
+    ],
+    "items": [
+      {
+        "id": "serialNum",
+        "name": "序号",
+        "width": 100,
+        "isChose": false,
+        "footer": "本页小计",
+        "isShowSum": true
+      },
+      {
+        "id": "productName",
+        "name": "商品名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "skuValues",
+        "name": "规格名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "remarks",
+        "name": "备注",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "num",
+        "name": "数量",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "comment",
+        "name": "货位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      }
+    ]
+  },
+  {
+    "type": "arrivalStorage",
+    "title": "采购入库单主体",
+    "itemTitle": "采购入库单明细",
+    "main": [
+      {
+        "id": "storageSn",
+        "name": "采购入库单号",
+        "isChose": false
+      },
+      {
+        "id": "gmtCreated",
+        "name": "采购入库时间",
+        "isChose": false
+      },
+      {
+        "id": "warehouseName",
+        "name": "仓库名称",
+        "isChose": false
+      },
+      {
+        "id": "printTime",
+        "name": "打印时间",
+        "isChose": false
+      },
+      {
+        "id": "remarks",
+        "name": "备注",
+        "isChose": false
+      },
+      {
+        "id": "createUserName",
+        "name": "制单人",
+        "isChose": false
+      }
+    ],
+    "items": [
+      {
+        "id": "serialNum",
+        "name": "序号",
+        "width": 100,
+        "isChose": false,
+        "footer": "本页小计",
+        "isShowSum": true
+      },
+      {
+        "id": "productName",
+        "name": "商品名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "skuValues",
+        "name": "规格名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "remarks",
+        "name": "备注",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "receivedNum",
+        "name": "数量",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "comment",
+        "name": "货位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      }
+    ]
+  },
+  {
+    "type": "saleOrder",
+    "title": "销售订单主体",
+    "itemTitle": "销售订单明细",
+    "main": [
+      {
+        "id": "orderSn",
+        "name": "订单编号",
+        "isChose": false
+      },
+      {
+        "id": "maker",
+        "name": "下单人",
+        "isChose": false
+      },
+      {
+        "id": "makeTime",
+        "name": "下单时间",
+        "isChose": false
+      },
+      {
+        "id": "printTime",
+        "name": "打印时间",
+        "isChose": false
+      },
+      {
+        "id": "buyerMessage",
+        "name": "买家留言",
+        "isChose": false
+      },
+      {
+        "id": "sellerMessage",
+        "name": "卖家留言",
+        "isChose": false
+      },
+      {
+        "id": "arrears",
+        "name": "历史欠款",
+        "isChose": false
+      }
+    ],
+    "items": [
+      {
+        "id": "serialNum",
+        "name": "序号",
+        "width": 100,
+        "isChose": false,
+        "footer": "本页小计",
+        "isShowSum": true
+      },
+      {
+        "id": "productName",
+        "name": "商品名称",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "productCode",
+        "name": "商品编码",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "finalPrice",
+        "name": "成交价",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "finalAmount",
+        "name": "成交额",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "sellingPrice",
+        "name": "销售价",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      },
+      {
+        "id": "sellingAmount",
+        "name": "销售额",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "num",
+        "name": "数量",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": true
+      },
+      {
+        "id": "comment",
+        "name": "货位",
+        "width": 100,
+        "isChose": false,
+        "footer": "$$$$$",
+        "isShowSum": false
+      }
+    ]
+  }
+]

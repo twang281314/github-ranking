@@ -1,0 +1,53 @@
+{
+  "status": "success",
+  "object": {
+    "storage": {
+      "storageId": "3aa6131c24f64435965a03c62b094619",
+      "busareaId": "f2025d7b165a4783b1287b2a97edd362",
+      "storageNo": "REC20171101000003",
+      "serviceId": "ff97f3743121429fbbd442809fda2878",
+      "storeId": "67345c27740742c3b3bd1dd2ca1ca860",
+      "storeName": "AAA",
+      "dispatchAreaId": "05a9b3cd2df548f8990b47ab5efd52cd",
+      "dispatchAreaName": "老余杭",
+      "warehouseId": "be672e6d2781490ca941a734f84eee83",
+      "warehouseName": "兴华配件总仓",
+      "trackingNo": "",
+      "productNum": 1,
+      "receiptman": "魏凯",
+      "receiptmanId": "23ae51226d8f4c4392b2a06e36b257e5",
+      "receiptTime": 1509525089,
+      "status": 2,
+      "remarks": null,
+      "createUserId": "68646050d9e6464996097eb9e29a6b97",
+      "createUserName": "系统实施",
+      "gmtCreated": 1509525089,
+      "updateUserId": "68646050d9e6464996097eb9e29a6b97",
+      "updateUserName": "系统实施",
+      "gmtUpdate": 1509525089,
+      "serviceNo": "ASO20171101000003",
+      "gmtStr": "2017-11-01 16:31:29"
+    },
+    "storageDetails": [{
+      "productName": "星恒旗舰款",
+      "productCode": "86000001",
+      "brandName": "星恒",
+      "categroyName": "锂电池",
+      "skuValues": "电池电流#40A|电池电压#36V",
+      "skuIds": "63",
+      "skuCode": "8600000163",
+      "model": "0",
+      "storageDetailId": "6a1049b12d204abfa346ea7939fa1ca0",
+      "storageId": "3aa6131c24f64435965a03c62b094619",
+      "productId": "d8358a48d9ce4877b4570fb4ee892f56",
+      "productSkuRelationId": "bfd127741fea424e89eaf799a7ec4856",
+      "num": 1,
+      "noStorageNum": 0,
+      "batteryCode": "",
+      "remarks": null,
+      "gmtCreated": 1509525089,
+      "gmtUpdate": 1509525089,
+      "unit": "个"
+    }]
+  }
+}
