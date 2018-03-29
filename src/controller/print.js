@@ -19,10 +19,14 @@ module.exports = class extends Base {
      * 模板设计页面
      */
     async designAction(){
+        let template = {};
         const templateUid = this.get('templateUid');
-        const templateType = this.get('templateType');
+        if(templateUid){
+            const templateModel = this.model('print_template', 'mysql');
+            template = await templateModel.where("templateUid='" + templateUid + "'").limit(1).select();
+        }
+        this.assign('template', template[0]);
         this.assign('templateUid', templateUid);
-        this.assign('templateType', templateType);
         await this.display();
     }
     /**

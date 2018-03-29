@@ -396,8 +396,8 @@ $("#saveBtn").bind("click", function () {
             if (data.status == 'success') {
                 refreshEditorPage();
                 hintsk({
-                    typea: "1",//1：成功  2：消息  3：错误  4：警告
-                    hintval: data.message//内容文字
+                    typea: "1", //1：成功  2：消息  3：错误  4：警告
+                    hintval: data.message //内容文字
                 })
             } else {
                 //重定向
@@ -406,8 +406,8 @@ $("#saveBtn").bind("click", function () {
                     return;
                 }
                 hintsk({
-                    typea: "3",//1：成功  2：消息  3：错误  4：警告
-                    hintval: data.message//内容文字
+                    typea: "3", //1：成功  2：消息  3：错误  4：警告
+                    hintval: data.message //内容文字
                 })
             }
         }
@@ -547,7 +547,7 @@ $("#saveAndPreviewBtn").bind("click", function () {
                         detail: obj.details
                     })
                 })
-            } else if (templateType == 'saleOrder') {//销售订单
+            } else if (templateType == 'saleOrder') { //销售订单
                 if (result.object.makeTime) {
                     result.object.makeTime = timestampToDateTime(result.object.makeTime);
                 }
@@ -567,3 +567,10 @@ $("#saveAndPreviewBtn").bind("click", function () {
     createPrintPage(templateDataTemp, printData, true);
     return false;
 });
+
+/**
+ * 下载打印控件
+ */
+function downPrintPlugin() {
+    window.open('http://www.lodop.net/download/CLodop_Setup_for_Win32NT_https_3.037Extend.zip')
+}

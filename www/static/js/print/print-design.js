@@ -440,7 +440,13 @@ function createPrintPage(template, datas, isPreview) {
 
     var pageWidth = parseInt(template.pageWidth) * 10;
     var pageHeight = parseInt(template.pageHeight) * 10;
+    try{
     LODOP.SET_LICENSES("","A3D70044525FD6F0FC184C75B9C7D44B","C94CEE276DB2187AE6B65D56B3FC2848","");
+    }catch(err){
+        console.log(err);
+        $('#installLodopTipModal').modal('show');
+        return;
+    }
     printData.forEach(function (data, i) {
         LODOP.PRINT_INITA(template.pageTop, template.pageLeft, pageWidth, pageHeight, '单据打印-' + Math.random() * 1000)
         LODOP.SET_PRINT_PAGESIZE(1, pageWidth, pageHeight, "");
