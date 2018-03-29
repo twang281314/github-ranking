@@ -14,12 +14,70 @@
 <body style="padding-top:30px;">
     <div id="app">
         <v-app id="inspire">
+
+            <v-dialog v-model="dialog" max-width="600px">
+                <v-btn color="primary" dark slot="activator" class="mb-2">新增</v-btn>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">{{ formTitle }}</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container grid-list-md>
+                      <v-layout wrap>
+                        <v-flex sm6>
+                          <v-text-field label="模板名称" v-model="editedItem.templateName"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6>
+                            <v-select
+                            :items="templateTypeList"
+                            v-model="editedItem.templateType"
+                            label="模板类型"
+                            class="input-group"
+                            item-value="value"
+                          ></v-select>
+                        </v-flex>
+                        <v-flex xs12 sm6 >
+                          <v-text-field type="Number" label="上偏移量(mm)" v-model="editedItem.pageTop"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 >
+                          <v-text-field type="Number" label="左偏移量(mm)" v-model="editedItem.pageLeft"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 >
+                          <v-text-field type="Number" label="纸张宽度(mm)" v-model="editedItem.pageWidth"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 >
+                          <v-text-field type="Number" label="纸张高度(mm)" v-model="editedItem.pageHeight"></v-text-field>
+                        </v-flex>
+                        <v-flex xs12 sm6 >
+                            <v-select
+                            :items="orientList"
+                            v-model="editedItem.orient"
+                            label="打印方向"
+                            class="input-group"
+                            item-value="value"
+                          ></v-select>
+                          </v-flex>
+                        <v-flex xs12  >
+                            <v-text-field label="模板备注" v-model="editedItem.remark"></v-text-field>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click.native="close">取消</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="save">保存</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+
+
           <v-data-table
             :headers="headers"
             :items="items"
             :search="search"
             v-model="selected"
-            item-key="name"
+            item-key="templateUid"
             select-all
             class="elevation-1"
           >
@@ -62,6 +120,7 @@
   el: '#app',
   data () {
     return {
+      dialog: false,
       search: '',
       selected: [],
       headers: [
@@ -85,7 +144,24 @@
         { text: '创建时间', value: 'gmt_created' },
         { text: '更新时间', value: 'gmt_updated' }
       ],
-      items: []
+      items: [],
+      editedIndex: -1,
+      editedItem: {
+    
+      },
+      defaultItem: {
+     
+      },
+    templateTypeList: [
+          { text: '发货单',value:0 },
+          { text: '调拨单',value:1 },
+          { text: '入库单',value:2 },
+          { text: '销售订单',value:4 }
+    ],
+    orientList:[
+          { text: '横向',value:2 },
+          { text: '纵向',value:1 },
+    ]
     }
   },
   mounted:function(){
@@ -93,9 +169,49 @@
         app.items = result.data.data;
     });
   },
+  computed: {
+    formTitle () {
+      return this.editedIndex === -1 ? '新增' : '编辑'
+    }
+  },
   methods:{
     designTemplate:function(template){
       window.open('/print/design?templateUid='+template.templateUid+'&templateType='+template.templateType)
+    },
+    editItem (item) {
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+    deleteItem (item) {
+      const index = this.items.indexOf(item)
+      confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
+    },
+    close () {
+      this.dialog = false
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem)
+        this.editedIndex = -1
+      }, 300)
+    },
+    save () {
+      axios.post('/print/add',{
+        template: JSON.stringify(this.editedItem)
+      },{
+        headers: {
+            token: "681466C53CB33AE98E16627CB6276789"
+        }
+      }).then(function(res){
+         console.log(res);
+      }).catch(function(err){
+         console.log(err);
+      })
+      if (this.editedIndex > -1) {
+        Object.assign(this.items[this.editedIndex], this.editedItem)
+      } else {
+        this.items.push(this.editedItem)
+      }
+      this.close()
     }
   }
 })

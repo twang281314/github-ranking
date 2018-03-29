@@ -20,3 +20,7 @@ Use pm2 to deploy app on production enviroment.
 ```
 pm2 startOrReload pm2.json
 ```
+
+## 打印模板
+
+https://github-ranking.anytao.net/print/list
