@@ -12,209 +12,277 @@
 </head>
 
 <body style="padding-top:30px;">
-    <div id="app">
-        <v-app id="inspire">
+  <div id="app">
+    <v-app id="inspire">
 
-            <v-dialog v-model="dialog" max-width="600px">
-                <v-btn color="primary" dark slot="activator" class="mb-2">新增</v-btn>
-                <v-card>
-                  <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
-                  </v-card-title>
-                  <v-card-text>
-                    <v-container grid-list-md>
-                      <v-layout wrap>
-                        <v-flex sm6>
-                          <v-text-field label="模板名称" v-model="editedItem.templateName"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6>
-                            <v-select
-                            :items="templateTypeList"
-                            v-model="editedItem.templateType"
-                            label="模板类型"
-                            class="input-group"
-                            item-value="value"
-                          ></v-select>
-                        </v-flex>
-                        <v-flex xs12 sm6 >
-                          <v-text-field type="Number" label="上偏移量(mm)" v-model="editedItem.pageTop"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 >
-                          <v-text-field type="Number" label="左偏移量(mm)" v-model="editedItem.pageLeft"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 >
-                          <v-text-field type="Number" label="纸张宽度(mm)" v-model="editedItem.pageWidth"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 >
-                          <v-text-field type="Number" label="纸张高度(mm)" v-model="editedItem.pageHeight"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12 sm6 >
-                            <v-select
-                            :items="orientList"
-                            v-model="editedItem.orient"
-                            label="打印方向"
-                            class="input-group"
-                            item-value="value"
-                          ></v-select>
-                          </v-flex>
-                        <v-flex xs12  >
-                            <v-text-field label="模板备注" v-model="editedItem.remark"></v-text-field>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card-text>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click.native="close">取消</v-btn>
-                    <v-btn color="blue darken-1" flat @click.native="save">保存</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
+      <v-dialog v-model="dialog" max-width="600px">
+        <v-btn color="primary" dark slot="activator" class="mb-2">新增</v-btn>
+        <v-card>
+          <v-card-title>
+            <span class="headline">{{ formTitle }}</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container grid-list-md>
+              <form>
+                <v-layout wrap>
+                  <v-flex sm6>
+                    <v-text-field label="模板名称" v-model="editedItem.templateName" :error-messages="errors.collect('templateName')" v-validate="'required|max:10'"
+                      data-vv-name="templateName" v-validate="required" required>
+                    </v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-select :items="templateTypeList" v-model="editedItem.templateType" label="模板类型" class="input-group" item-value="value"
+                      v-validate="'required'" :error-messages="errors.collect('templateType')" data-vv-name="templateType"
+                      required></v-select>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-text-field type="Number" label="上偏移量(mm)" v-model="editedItem.pageTop" v-validate="'required'" :error-messages="errors.collect('pageTop')"
+                      data-vv-name="pageTop" required></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-text-field type="Number" label="左偏移量(mm)" v-model="editedItem.pageLeft" v-validate="'required'" :error-messages="errors.collect('pageLeft')"
+                      data-vv-name="pageLeft" required></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-text-field type="Number" label="纸张宽度(mm)" v-model="editedItem.pageWidth" v-validate="'required'" :error-messages="errors.collect('pageWidth')"
+                      data-vv-name="pageWidth" required></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-text-field type="Number" label="纸张高度(mm)" v-model="editedItem.pageHeight" v-validate="'required'" :error-messages="errors.collect('pageHeight')"
+                      data-vv-name="pageHeight" required></v-text-field>
+                  </v-flex>
+                  <v-flex xs12 sm6>
+                    <v-select :items="orientList" v-model="editedItem.orient" label="打印方向" class="input-group" item-value="value" v-validate="'required'"
+                      :error-messages="errors.collect('orient')" data-vv-name="orient" required></v-select>
+                  </v-flex>
+                  <v-flex xs12>
+                    <v-text-field label="模板备注" v-model="editedItem.remark"></v-text-field>
+                  </v-flex>
+                </v-layout>
+              </form>
+            </v-container>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" flat @click.native="close">取消</v-btn>
+            <v-btn color="blue darken-1" flat @click.native="save">保存</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
 
 
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            :search="search"
-            v-model="selected"
-            item-key="templateUid"
-            select-all
-            class="elevation-1"
-          >
-            <template slot="headerCell" slot-scope="props">
-              <v-tooltip bottom>
-                <span slot="activator">
-                  {{ props.header.text }}
-                </span>
-                <span>
-                  {{ props.header.text }}
-                </span>
-              </v-tooltip>
-            </template>
-            <template slot="items" slot-scope="props">
-              <td>
-                <v-checkbox
-                  primary
-                  hide-details
-                  v-model="props.selected"
-                ></v-checkbox>
-              </td>
-              <td ><a v-on:click.stop="designTemplate(props.item)">操作</a></td>
-              <td>{{ props.item.templateName }}</td>
-              <td>{{ props.item.templateType }}</td>
-              <td>{{ props.item.pageTop }}</td>
-              <td>{{ props.item.pageLeft }}</td>
-              <td>{{ props.item.pageWidth }}</td>
-              <td>{{ props.item.pageHeight }}</td>
-              <td>{{ props.item.gmt_created }}</td>
-              <td>{{ props.item.gmt_updated }}</td>
-            </template>
-          </v-data-table>
-        </v-app>
-      </div>
+      <v-data-table :headers="headers" :items="items" :search="search" v-model="selected" item-key="templateUid" select-all class="elevation-1">
+        <template slot="headerCell" slot-scope="props">
+          <v-tooltip bottom>
+            <span slot="activator">
+              {{ props.header.text }}
+            </span>
+            <span>
+              {{ props.header.text }}
+            </span>
+          </v-tooltip>
+        </template>
+        <template slot="items" slot-scope="props">
+          <td>
+            <v-checkbox primary hide-details v-model="props.selected"></v-checkbox>
+          </td>
+          <td>
+            <a v-on:click.stop="designTemplate(props.item)">设计</a>
+          </td>
+          <td>{{ props.item.templateName }}</td>
+          <td>{{ props.item.templateType }}</td>
+          <td>{{ props.item.pageTop }}</td>
+          <td>{{ props.item.pageLeft }}</td>
+          <td>{{ props.item.pageWidth }}</td>
+          <td>{{ props.item.pageHeight }}</td>
+          <td>{{ props.item.gmt_created }}</td>
+          <td>{{ props.item.gmt_updated }}</td>
+        </template>
+      </v-data-table>
+    </v-app>
+  </div>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+  <script src="https://unpkg.com/vee-validate@2.0.6/dist/vee-validate.js"></script>
   <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
   <script>
-  var app=new Vue({
-  el: '#app',
-  data () {
-    return {
-      dialog: false,
-      search: '',
-      selected: [],
-      headers: [
-        {
-          text: '操作',
-          align: 'left',
-          sortable: false,
-          value: 'operate'
-        },
-        {
-          text: '模板名称',
-          align: 'left',
-          sortable: false,
-          value: 'name'
-        },
-        { text: '模板类型', value: 'templateType' },
-        { text: '上偏移量(mm)', value: 'pageTop' },
-        { text: '左偏移量(mm)', value: 'pageLeft' },
-        { text: '纸张宽度(mm)', value: 'pageWidth' },
-        { text: '纸张高度(mm)', value: 'pageHeight' },
-        { text: '创建时间', value: 'gmt_created' },
-        { text: '更新时间', value: 'gmt_updated' }
-      ],
-      items: [],
-      editedIndex: -1,
-      editedItem: {
-    
+    Vue.use(VeeValidate);
+    var app = new Vue({
+      el: '#app',
+      $_veeValidate: {
+        validator: 'new'
       },
-      defaultItem: {
-     
-      },
-    templateTypeList: [
-          { text: '发货单',value:0 },
-          { text: '调拨单',value:1 },
-          { text: '入库单',value:2 },
-          { text: '销售订单',value:4 }
-    ],
-    orientList:[
-          { text: '横向',value:2 },
-          { text: '纵向',value:1 },
-    ]
-    }
-  },
-  mounted:function(){
-    axios.get('/print/getListData').then(function(result){
-        app.items = result.data.data;
-    });
-  },
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? '新增' : '编辑'
-    }
-  },
-  methods:{
-    designTemplate:function(template){
-      window.open('/print/design?templateUid='+template.templateUid+'&templateType='+template.templateType)
-    },
-    editItem (item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-    deleteItem (item) {
-      const index = this.items.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
-    },
-    close () {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-    save () {
-      axios.post('/print/add',{
-        template: JSON.stringify(this.editedItem)
-      },{
-        headers: {
-            token: "681466C53CB33AE98E16627CB6276789"
+      data() {
+        return {
+          dialog: false,
+          search: '',
+          selected: [],
+          headers: [{
+              text: '操作',
+              align: 'left',
+              sortable: false,
+              value: 'operate'
+            },
+            {
+              text: '模板名称',
+              align: 'left',
+              sortable: false,
+              value: 'name'
+            },
+            {
+              text: '模板类型',
+              value: 'templateType'
+            },
+            {
+              text: '上偏移量(mm)',
+              value: 'pageTop'
+            },
+            {
+              text: '左偏移量(mm)',
+              value: 'pageLeft'
+            },
+            {
+              text: '纸张宽度(mm)',
+              value: 'pageWidth'
+            },
+            {
+              text: '纸张高度(mm)',
+              value: 'pageHeight'
+            },
+            {
+              text: '创建时间',
+              value: 'gmt_created'
+            },
+            {
+              text: '更新时间',
+              value: 'gmt_updated'
+            }
+          ],
+          items: [],
+          editedIndex: -1,
+          editedItem: {
+
+          },
+          defaultItem: {
+
+          },
+          templateTypeList: [{
+              text: '发货单',
+              value: 0
+            },
+            {
+              text: '调拨单',
+              value: 1
+            },
+            {
+              text: '入库单',
+              value: 2
+            },
+            {
+              text: '销售订单',
+              value: 4
+            }
+          ],
+          orientList: [{
+              text: '横向',
+              value: 2
+            },
+            {
+              text: '纵向',
+              value: 1
+            },
+          ],
+          dictionary: {
+            attributes: {
+              email: 'E-mail Address'
+              // custom attributes
+            },
+            custom: {
+              templateName: {
+                required: () => '模板名称不能为空',
+                max: 'The name field may not be greater than 10 characters'
+                // custom messages
+              },
+              templateType: {
+                required: () => '模板类型不能为空',
+              },
+              pageTop: {
+                required: () => '上偏移量不能为空',
+              },
+              pageLeft: {
+                required: () => '左偏移量不能为空',
+              },
+              pageWidth: {
+                required: () => '纸张宽度不能为空',
+              },
+              pageHeight: {
+                required: () => '纸张高度不能为空',
+              },
+              orient: {
+                required: () => '打印方向不能为空',
+              }
+            }
+          }
         }
-      }).then(function(res){
-         console.log(res);
-      }).catch(function(err){
-         console.log(err);
-      })
-      if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
+      },
+      mounted: function () {
+        this.$validator.localize('en', this.dictionary)
+        axios.get('/print/getListData').then(function (result) {
+          app.items = result.data.data;
+        });
+      },
+      computed: {
+        formTitle() {
+          return this.editedIndex === -1 ? '新增' : '编辑'
+        }
+      },
+      methods: {
+        designTemplate: function (template) {
+          window.open('/print/design?templateUid=' + template.templateUid + '&templateType=' + template.templateType)
+        },
+        editItem(item) {
+          this.editedIndex = this.items.indexOf(item)
+          this.editedItem = Object.assign({}, item)
+          this.dialog = true
+        },
+        deleteItem(item) {
+          const index = this.items.indexOf(item)
+          confirm('Are you sure you want to delete this item?') && this.items.splice(index, 1)
+        },
+        close() {
+          this.dialog = false
+          setTimeout(() => {
+            this.editedItem = Object.assign({}, this.defaultItem)
+            this.editedIndex = -1
+          }, 300)
+        },
+        save() {
+          var that = this;
+          this.$validator.validateAll().then(function (result) {
+            if (result) {
+              axios.post('/print/add', {
+                template: JSON.stringify(that.editedItem)
+              }, {
+                headers: {
+                  token: "681466C53CB33AE98E16627CB6276789"
+                }
+              }).then(function (res) {
+                console.log(res);
+              }).catch(function (err) {
+                console.log(err);
+              })
+              if (that.editedIndex > -1) {
+                Object.assign(that.items[that.editedIndex], that.editedItem)
+              } else {
+                that.items.push(that.editedItem)
+              }
+              that.close()
+            }
+          });
+
+        }
       }
-      this.close()
-    }
-  }
-})
+    })
   </script>
 </body>
 
