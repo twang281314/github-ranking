@@ -11,17 +11,17 @@ module.exports = class extends Base {
     /**
      * 模板列表页面
      */
-    async listAction(){
+    async listAction() {
         await this.display();
     }
-    
+
     /**
      * 模板设计页面
      */
-    async designAction(){
+    async designAction() {
         let template = {};
         const templateUid = this.get('templateUid');
-        if(templateUid){
+        if (templateUid) {
             const templateModel = this.model('print_template', 'mysql');
             template = await templateModel.where("templateUid='" + templateUid + "'").limit(1).select();
         }
@@ -136,9 +136,12 @@ module.exports = class extends Base {
         })();
     }
 
-    async getListDataAction(){
+    async getListDataAction() {
+        const pageNum = this.get('pageNum') || 1;//当前页数
+        const pageSize = this.get('pageSize') || 20;//每页条数
         const templateModel = this.model('print_template', 'mysql');
-        const templates = await templateModel.select();
+        templateModel._pk ='templateUid';
+        const templates = await templateModel.page(pageNum,pageSize).countSelect();
         return this.success(templates);
     }
 };

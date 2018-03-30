@@ -71,7 +71,17 @@
       </v-dialog>
 
 
-      <v-data-table :headers="headers" :items="items" :search="search" v-model="selected" item-key="templateUid" select-all class="elevation-1">
+      <v-data-table 
+       :headers="headers" 
+       :items="items"
+       :search="search"
+       :pagination.sync="pagination"
+       :total-items="totalItems"
+       :loading="loading"
+        v-model="selected"
+        item-key="templateUid"
+         select-all
+          class="elevation-1">
         <template slot="headerCell" slot-scope="props">
           <v-tooltip bottom>
             <span slot="activator">
@@ -114,6 +124,9 @@
       },
       data() {
         return {
+          totalItems: 0,
+          loading: true,
+          pagination: {},
           dialog: false,
           search: '',
           selected: [],
@@ -225,10 +238,23 @@
           }
         }
       },
+      watch: {
+        pagination: {
+          handler() {
+            this.getDataFromApi()
+              .then(data => {
+                this.items = data.data
+                this.totalItems = data.count
+              })
+          },
+          deep: true
+        }
+      },
       mounted: function () {
         this.$validator.localize('en', this.dictionary)
-        axios.get('/print/getListData').then(function (result) {
-          app.items = result.data.data;
+        this.getDataFromApi().then(data=>{
+                this.items = data.data
+                this.totalItems = data.count
         });
       },
       computed: {
@@ -237,6 +263,19 @@
         }
       },
       methods: {
+        //获取数据
+        getDataFromApi: function () {
+          this.loading = true;
+          return new Promise((resolve , reject) => {
+
+          const { sortBy, descending, page, rowsPerPage } = this.pagination
+    
+          axios.get('/print/getListData?pageSize='+rowsPerPage+'&pageNum='+page).then(function (result) {
+            app.loading = false;
+            resolve(result.data.data);
+          });
+          });
+        },
         designTemplate: function (template) {
           window.open('/print/design?templateUid=' + template.templateUid + '&templateType=' + template.templateType)
         },
