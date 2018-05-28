@@ -16,6 +16,8 @@ module.exports = class extends Base {
     let trade_no = this.post('trade_no')
 
     think.logger.info(this.ctx)
+    think.logger.info(out_trade_no)
+    think.logger.info(trade_no)
 
     return this.json({
         data:{
