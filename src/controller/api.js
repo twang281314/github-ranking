@@ -12,19 +12,14 @@ module.exports = class extends Base {
    */
   async receiveNotifyAction(){
 
-    let out_trade_no = this.post('out_trade_no')
-    let trade_no = this.post('trade_no')
+    let payInfo = this.post();
 
-    think.logger.info(this.ctx)
-    think.logger.info(out_trade_no)
-    think.logger.info(trade_no)
+    let alipayModel = think.model('sys_alipay_log', 'mysql');
 
-    return this.json({
-        data:{
-            out_trade_no:out_trade_no,
-            trade_no:trade_no
-        }
-    })
+    let result = alipayModel.add(payInfo);
+
+    console.log(result)
     
+    return 'success';
   }
 };
