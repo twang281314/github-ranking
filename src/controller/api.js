@@ -19,7 +19,6 @@ module.exports = class extends Base {
     let result = alipayModel.add(payInfo);
 
     console.log(result)
-    
-    return 'success';
+    this.body = 'success';
   }
 };
