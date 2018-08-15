@@ -38,3 +38,48 @@ CREATE TABLE `print_template_detail` (
   `readOnly` tinyint(1) DEFAULT NULL COMMENT '是否禁止修改',
   PRIMARY KEY (`detailUid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+
+CREATE TABLE `repositories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `full_name` varchar(500) DEFAULT NULL,
+  `html_url` varchar(500) DEFAULT NULL,
+  `description` varchar(800) DEFAULT NULL,
+  `stargazers_count` int(11) DEFAULT NULL,
+  `watchers_count` int(11) DEFAULT NULL,
+  `language` varchar(50) DEFAULT NULL,
+  `forks_count` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `login` varchar(100) DEFAULT NULL,
+  `avatar_url` varchar(500) DEFAULT NULL,
+  `url` varchar(200) DEFAULT NULL,
+  `html_url` varchar(200) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `company` varchar(100) DEFAULT NULL,
+  `blog` varchar(100) DEFAULT NULL,
+  `location` varchar(100) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `public_repos` int(11) DEFAULT NULL,
+  `followers` int(11) DEFAULT NULL,
+  `following` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `last_update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+CREATE TABLE `updateLog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `updateTime` datetime DEFAULT NULL,
+  `updateType` varchar(50) DEFAULT NULL,
+  `updateResult` varchar(20) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8
+
