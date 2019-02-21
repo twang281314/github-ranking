@@ -42,7 +42,8 @@
                 </table>
             </div>
             <%include inc/footer.html%>
-                <script type="text/javascript" charset="utf-8">
+            <script src="//twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script>
+            <script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				var repositories=$('#repositories').DataTable({
                      columnDefs: [{
@@ -55,7 +56,13 @@
                          render: function (data, type, full, meta) {
                              return '<a href="' + data + '" target="_blank">' + data + '</a>';
                          }
-                     }                    
+                     },
+                     {
+                         targets: [5],
+                         render: function (data, type, full, meta) {
+                             return twemoji.parse(data)
+                         }
+                     }                        
                     ],
                     paging:false,
                     order: [[ 3, 'desc' ]],
