@@ -39,7 +39,7 @@ exports.model = {
     handle: mysql,
     database: 'lifesing_blog',
     prefix: '',
-    encoding: 'utf8',
+    charset: 'utf8mb4',
     host: 'anytao.net',
     port: '',
     user: 'root',
