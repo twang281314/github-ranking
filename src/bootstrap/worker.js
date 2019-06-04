@@ -11,6 +11,7 @@
 //        console.log("It's been 1 minutes!");
 // });
 
+/*
 import schedule from 'node-schedule';
 
 let jobId = schedule.scheduleJob(' 59 23 * * *', () => {
@@ -31,4 +32,4 @@ let jobUpdateUser = schedule.scheduleJob(' 25 23 * * *', () => {
 
     think.http("/users/updateuser", true);
 
-});
+});*/
