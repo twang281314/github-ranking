@@ -52,5 +52,8 @@
     "projectName": "github-ranking",
     "templateName": "C:\\Users\\anytao\\AppData\\Roaming\\npm\\node_modules\\think-cli\\default_template",
     "isMultiModule": false
-  }
+  },
+  "engines": {
+    "node": "16.x"
+  },
 }
