@@ -75,4 +75,20 @@ module.exports = class extends Base {
         }).select()
         return this.json(data)
     }
+    
+    /**
+     * 系统菜单
+     * @returns 
+     */
+    async getMenuAction(){
+        let menu = [
+            {
+              name: 'list.table-list',
+              icon: 'star',
+              path: '/list',
+              component: 'TableList',
+            }
+        ]
+        return this.json(menu)
+    }
 };
