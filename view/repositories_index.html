@@ -43,7 +43,7 @@
             </div>
             <%include inc/footer.html%>
 	    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
-<!--             <script src="//twemoji.maxcdn.com/2/twemoji.min.js?11.3"></script> -->
+<!--             <script src="//cdnjs.cloudflare.com/ajax/libs/twemoji/twemoji.min.js?11.3"></script> -->
             <script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				var repositories=$('#repositories').DataTable({
@@ -61,7 +61,7 @@
                      {
                          targets: [5],
                          render: function (data, type, full, meta) {
-                             return twemoji.parse(data)
+                             return twemoji.parse(data,{ base: 'https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/' })
                          }
                      }                        
                     ],
